@@ -1,179 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        Welcome - Employee Management System
-    </title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Employee Management System</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
-
-
 <body class="welcome-body">
 
-
-    <!-- =====================================================
-         WELCOME PAGE
-    ====================================================== -->
-
     <div class="welcome-container">
-
-
-        <!-- LEFT SIDE -->
-
+        <!-- Left Banner -->
         <div class="welcome-left">
-
-            <div class="logo">
-                EM
-            </div>
-
-
-            <h1>
-                Employee<br>
-                Management<br>
-                System
-            </h1>
-
-
-            <p>
-                A simple and efficient way to
-                manage employee information,
-                departments and records.
-            </p>
-
+            <div class="logo">EM</div>
+            <h1>Employee<br>Management<br>System</h1>
+            <p>A simple and efficient way to manage employee information, departments, and records.</p>
         </div>
 
-
-
-        <!-- RIGHT SIDE -->
-
+        <!-- Right Content -->
         <div class="welcome-right">
-
-            <h2>
-                Welcome!
-            </h2>
-
-
-            <p>
-                Manage your employee records
-                from one convenient dashboard.
-            </p>
-
-
-            <!-- FEATURES -->
+            <h2>Welcome!</h2>
+            <p>Manage your employee records from one convenient dashboard.</p>
 
             <div class="features">
-
-
-                <div class="feature">
-
-                    <div class="feature-icon">
-                        ✓
-                    </div>
-
-                    <span>
-                        Add and manage employees
-                    </span>
-
-                </div>
-
-
-                <div class="feature">
-
-                    <div class="feature-icon">
-                        ✓
-                    </div>
-
-                    <span>
-                        Search, filter and sort employees
-                    </span>
-
-                </div>
-
-
-                <div class="feature">
-
-                    <div class="feature-icon">
-                        ✓
-                    </div>
-
-                    <span>
-                        View detailed employee profiles
-                    </span>
-
-                </div>
-
-
-                <div class="feature">
-
-                    <div class="feature-icon">
-                        ✓
-                    </div>
-
-                    <span>
-                        Export employee records
-                    </span>
-
-                </div>
-
-
-                <div class="feature">
-
-                    <div class="feature-icon">
-                        ✓
-                    </div>
-
-                    <span>
-                        Data remains after page refresh
-                    </span>
-
-                </div>
-
+                <div class="feature"><div class="feature-icon">✓</div><span>Add and manage employees</span></div>
+                <div class="feature"><div class="feature-icon">✓</div><span>Search, filter, and sort employees</span></div>
+                <div class="feature"><div class="feature-icon">✓</div><span>View detailed employee profiles</span></div>
+                <div class="feature"><div class="feature-icon">✓</div><span>Export employee records</span></div>
+                <div class="feature"><div class="feature-icon">✓</div><span>Data remains after page refresh</span></div>
             </div>
 
-
-            <!-- START -->
-
-            <button
-                class="start-btn"
-                onclick="openDashboard()"
-            >
-                Get Started →
-            </button>
-
-
-            <p class="footer-text">
-                Employee Management System
-            </p>
-
+            <button class="start-btn" onclick="openDashboard()">Get Started →</button>
+            <p class="footer-text">Employee Management System</p>
         </div>
-
     </div>
 
-
-
     <script>
-
         function openDashboard() {
-
-            window.location.href =
-                "employees.html";
-
+            window.location.href = "employees.html";
         }
-
     </script>
-
-
 </body>
-
 </html>
