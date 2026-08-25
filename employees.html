@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Employee Management System
+    </title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+
+        <div class="header-content">
+
+            <h1>
+                Employee Management System
+            </h1>
+
+            <p>
+                Manage employees efficiently
+            </p>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <!-- Dark Mode -->
+
+            <button
+                id="themeBtn"
+                class="secondary-btn"
+                title="Toggle dark mode"
+            >
+                🌙 Dark Mode
+            </button>
+
+
+            <!-- Refresh -->
+
+            <button
+                id="refreshBtn"
+                class="secondary-btn"
+            >
+                🔄 Refresh
+            </button>
+
+
+            <!-- Export -->
+
+            <button
+                id="exportBtn"
+                class="secondary-btn"
+            >
+                📥 Export CSV
+            </button>
+
+
+            <!-- Add -->
+
+            <button
+                id="addEmployeeBtn"
+                class="primary-btn"
+            >
+                + Add Employee
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <main>
+
+
+        <!-- =====================================================
+             DASHBOARD
+        ====================================================== -->
+
+        <section class="dashboard">
+
+
+            <div class="card">
+
+                <h3>
+                    Total Employees
+                </h3>
+
+                <p id="totalEmployees">
+                    0
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             EMPLOYEE SECTION
+        ====================================================== -->
+
+        <section class="employee-section">
+
+
+            <!-- SECTION HEADER -->
+
+            <div class="section-header">
+
+
+                <h2>
+                    Employee List
+                </h2>
+
+
+                <div class="controls">
+
+
+                    <!-- Search -->
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search employee..."
+                    >
+
+
+                    <!-- Department -->
+
+                    <select
+                        id="departmentFilter"
+                    >
+
+                        <option value="all">
+                            All Departments
+                        </option>
+
+                        <option value="Engineering">
+                            Engineering
+                        </option>
+
+                        <option value="Human Resources">
+                            Human Resources
+                        </option>
+
+                        <option value="Marketing">
+                            Marketing
+                        </option>
+
+                        <option value="Finance">
+                            Finance
+                        </option>
+
+                        <option value="Support">
+                            Support
+                        </option>
+
+                        <option value="Product Management">
+                            Product Management
+                        </option>
+
+                        <option value="Services">
+                            Services
+                        </option>
+
+                        <option value="Legal">
+                            Legal
+                        </option>
+
+                        <option value="Sales">
+                            Sales
+                        </option>
+
+                        <option value="Accounting">
+                            Accounting
+                        </option>
+
+                        <option value="Training">
+                            Training
+                        </option>
+
+                    </select>
+
+
+                    <!-- Sort -->
+
+                    <select
+                        id="sortSelect"
+                    >
+
+                        <option value="default">
+                            Sort By
+                        </option>
+
+                        <option value="nameAsc">
+                            Name A-Z
+                        </option>
+
+                        <option value="nameDesc">
+                            Name Z-A
+                        </option>
+
+                        <option value="idAsc">
+                            ID Low-High
+                        </option>
+
+                        <option value="idDesc">
+                            ID High-Low
+                        </option>
+
+                    </select>
+
+
+                    <!-- Items per page -->
+
+                    <select
+                        id="itemsPerPage"
+                    >
+
+                        <option value="5">
+                            5 per page
+                        </option>
+
+                        <option value="10" selected>
+                            10 per page
+                        </option>
+
+                        <option value="20">
+                            20 per page
+                        </option>
+
+                        <option value="30">
+                            30 per page
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LOADING -->
+
+            <p
+                id="loadingMessage"
+                class="message"
+            >
+                Loading employees...
+            </p>
+
+
+
+            <!-- ERROR -->
+
+            <p
+                id="errorMessage"
+                class="error-message"
+            ></p>
+
+
+
+            <!-- TABLE -->
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                Department
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="employeeTableBody"
+                    >
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+
+            <!-- PAGINATION -->
+
+            <div class="pagination">
+
+
+                <button
+                    id="prevBtn"
+                >
+                    Previous
+                </button>
+
+
+                <span id="pageInfo">
+                    Page 1
+                </span>
+
+
+                <button
+                    id="nextBtn"
+                >
+                    Next
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         ADD / EDIT MODAL
+    ====================================================== -->
+
+    <div
+        id="employeeModal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <h2 id="modalTitle">
+                    Add Employee
+                </h2>
+
+
+                <button
+                    id="closeModalBtn"
+                    class="close-btn"
+                    type="button"
+                >
+                    &times;
+                </button>
+
+            </div>
+
+
+
+            <form
+                id="employeeForm"
+                novalidate
+            >
+
+
+                <!-- FIRST NAME -->
+
+                <div class="form-group">
+
+                    <label for="firstName">
+                        First Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="firstName"
+                        placeholder="Enter first name"
+                    >
+
+                    <small
+                        id="firstNameError"
+                        class="field-error"
+                    ></small>
+
+                </div>
+
+
+
+                <!-- LAST NAME -->
+
+                <div class="form-group">
+
+                    <label for="lastName">
+                        Last Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="lastName"
+                        placeholder="Enter last name"
+                    >
+
+                    <small
+                        id="lastNameError"
+                        class="field-error"
+                    ></small>
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter email"
+                    >
+
+                    <small
+                        id="emailError"
+                        class="field-error"
+                    ></small>
+
+                </div>
+
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone
+                    </label>
+
+                    <input
+                        type="text"
+                        id="phone"
+                        placeholder="Enter phone number"
+                    >
+
+                    <small
+                        id="phoneError"
+                        class="field-error"
+                    ></small>
+
+                </div>
+
+
+
+                <!-- DEPARTMENT -->
+
+                <div class="form-group">
+
+                    <label for="department">
+                        Department
+                    </label>
+
+
+                    <select id="department">
+
+                        <option value="">
+                            Select Department
+                        </option>
+
+                        <option value="Engineering">
+                            Engineering
+                        </option>
+
+                        <option value="Human Resources">
+                            Human Resources
+                        </option>
+
+                        <option value="Marketing">
+                            Marketing
+                        </option>
+
+                        <option value="Finance">
+                            Finance
+                        </option>
+
+                        <option value="Support">
+                            Support
+                        </option>
+
+                        <option value="Product Management">
+                            Product Management
+                        </option>
+
+                        <option value="Services">
+                            Services
+                        </option>
+
+                        <option value="Legal">
+                            Legal
+                        </option>
+
+                        <option value="Sales">
+                            Sales
+                        </option>
+
+                        <option value="Accounting">
+                            Accounting
+                        </option>
+
+                        <option value="Training">
+                            Training
+                        </option>
+
+                    </select>
+
+
+                    <small
+                        id="departmentError"
+                        class="field-error"
+                    ></small>
+
+                </div>
+
+
+
+                <!-- FORM BUTTONS -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        id="cancelBtn"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Save Employee
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         EMPLOYEE PROFILE MODAL
+    ====================================================== -->
+
+    <div
+        id="profileModal"
+        class="modal"
+    >
+
+        <div class="profile-modal-content">
+
+
+            <button
+                id="closeProfileBtn"
+                class="close-btn profile-close"
+                type="button"
+            >
+                &times;
+            </button>
+
+
+            <div
+                id="profileContent"
+                class="profile-content"
+            >
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         TOAST CONTAINER
+    ====================================================== -->
+
+    <div
+        id="toastContainer"
+        class="toast-container"
+    ></div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
