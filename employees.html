@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- Header -->
     <header class="header">
         <div class="header-content">
             <h1>Employee Management System</h1>
@@ -21,18 +19,13 @@
             <button id="addEmployeeBtn" class="primary-btn">+ Add Employee</button>
         </div>
     </header>
-
-    <!-- Main Content -->
     <main>
-        <!-- Dashboard -->
         <section class="dashboard">
             <div class="card">
                 <h3>Total Employees</h3>
                 <p id="totalEmployees">0</p>
             </div>
         </section>
-
-        <!-- Employee Section -->
         <section class="employee-section">
             <div class="section-header">
                 <h2>Employee List</h2>
@@ -73,7 +66,6 @@
 
             <p id="loadingMessage" class="message">Loading employees...</p>
             <p id="errorMessage" class="error-message"></p>
-
             <div class="table-container">
                 <table>
                     <thead>
@@ -97,8 +89,6 @@
             </div>
         </section>
     </main>
-
-    <!-- Add / Edit Employee Modal -->
     <div id="employeeModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -158,15 +148,12 @@
         </div>
     </div>
 
-    <!-- Profile Modal -->
     <div id="profileModal" class="modal">
         <div class="profile-modal-content">
             <button id="closeProfileBtn" class="close-btn profile-close" type="button">&times;</button>
             <div id="profileContent" class="profile-content"></div>
         </div>
     </div>
-
-    <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
 
     <script src="script.js"></script>
