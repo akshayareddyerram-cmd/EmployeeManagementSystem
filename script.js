@@ -1,12 +1,9 @@
 const API_URL = "https://dummyjson.com/users";
 
 let employees = [];
-
 const $ = (id) => document.getElementById(id);
-
 document.addEventListener("DOMContentLoaded", () => {
     loadEmployees();
-    
     $("searchInput").addEventListener("input", renderTable);
     $("departmentFilter").addEventListener("change", renderTable);
     $("employeeForm").addEventListener("submit", handleSave);
@@ -16,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadEmployees() {
     const localData = localStorage.getItem("employees");
-    
     if (localData) {
         employees = JSON.parse(localData);
     } else {
@@ -25,7 +21,6 @@ async function loadEmployees() {
         employees = data.users;
         saveData();
     }
-    
     renderTable();
 }
 
@@ -38,13 +33,10 @@ function renderTable() {
     const search = $("searchInput").value.toLowerCase();
     const dept = $("departmentFilter").value;
     const tbody = $("employeeTableBody");
-
     tbody.innerHTML = "";
-
     const filtered = employees.filter(emp => {
         const name = `${emp.firstName} ${emp.lastName}`.toLowerCase();
         const empDept = emp.company?.department || "";
-        
         return name.includes(search) && (dept === "all" || empDept === dept);
     });
 
@@ -67,7 +59,6 @@ function renderTable() {
 
 function showModal(emp = null) {
     $("employeeModal").style.display = "flex";
-    
     if (emp) {
         $("modalTitle").textContent = "Edit Employee";
         $("employeeId").value = emp.id;
@@ -89,7 +80,6 @@ function hideModal() {
 
 function handleSave(e) {
     e.preventDefault();
-    
     const id = $("employeeId").value;
     const empData = {
         firstName: $("firstName").value.trim(),
@@ -106,7 +96,6 @@ function handleSave(e) {
         empData.id = Date.now();
         employees.push(empData);
     }
-
     saveData();
     renderTable();
     hideModal();
